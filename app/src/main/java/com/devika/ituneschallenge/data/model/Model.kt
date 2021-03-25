@@ -13,7 +13,7 @@ data class Response(
 data class ItunesData(
     val artworkUrl100: String,
     @PrimaryKey val collectionId: Int,
-    val collectionName: String?,
+    val artistName: String?,
     var searchTerm: String = ""
 )
 

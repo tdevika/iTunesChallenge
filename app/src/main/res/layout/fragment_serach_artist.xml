@@ -1,46 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.devika.ituneschallenge.ui.SerachArtistViewModel" />
     </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="noScroll">
-
-        </com.google.android.material.appbar.MaterialToolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-        <ProgressBar
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:setProgressState = "@{viewModel.uiState}"/>
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="?attr/toolbarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="noScroll"
+                app:titleTextColor="@color/cardview_light_background">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:setErrorState="@{viewModel.uiState}"
-            />
+            app:setErrorState="@{viewModel.uiState}" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:setVisibility="@{viewModel.uiState}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/emptyView"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:setEmptyState="@{viewModel.uiState}"
+            android:drawableTop= "@drawable/ic_search_artist_icon"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:text="@string/search_for_artist"
+            android:textAppearance="?textAppearanceSubtitle1"
+            android:textColor="@color/cardview_light_background" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/circle_progress_bar"
+            app:setProgressState="@{viewModel.uiState}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

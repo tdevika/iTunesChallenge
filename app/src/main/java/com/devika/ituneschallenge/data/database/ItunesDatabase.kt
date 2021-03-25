@@ -8,6 +8,7 @@ import com.devika.ituneschallenge.data.model.ItunesData
 
 @Database(entities = [ItunesData::class], version = 1, exportSchema = false)
 abstract class ItunesDatabase : RoomDatabase() {
+
     abstract fun ItunesDao(): ItunesDao
 
     companion object {

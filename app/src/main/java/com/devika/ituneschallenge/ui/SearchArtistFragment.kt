@@ -1,11 +1,13 @@
 package com.devika.ituneschallenge.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
@@ -20,7 +22,6 @@ import com.devika.ituneschallenge.data.domain.UiState
 import com.devika.ituneschallenge.data.domain.getList
 import com.devika.ituneschallenge.databinding.FragmentSerachArtistBinding
 import com.devika.ituneschallenge.utils.ItunesViewModelFactory
-import kotlinx.android.synthetic.main.fragment_serach_artist.*
 import javax.inject.Inject
 
 
@@ -74,18 +75,15 @@ class SearchArtistFragment : Fragment() {
     }
 
     private fun setObserver() {
-        viewModel.uiState.observe(viewLifecycleOwner, Observer {
-            it.let {
-                when (it) {
-                    is UiState.Success -> {
-                        binding.recycler.isVisible = true
+        with(viewModel) {
+            uiState.observe(viewLifecycleOwner, Observer {
+                it.let {
+                    if (it is UiState.Success) {
                         searchArtistAdapter.submitList(it.value.getList())
                     }
-                    else -> binding.recycler.isVisible = false
-
                 }
-            }
-        })
+            })
+        }
     }
 
     private fun setRecyclerView() {
@@ -102,7 +100,7 @@ class SearchArtistFragment : Fragment() {
         if (searchItem != null) {
             val searchView = searchItem.actionView as SearchView
             searchItem.expandActionView()
-            searchView.queryHint = "Search Artist"
+            searchView.queryHint = "Search here"
 
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
