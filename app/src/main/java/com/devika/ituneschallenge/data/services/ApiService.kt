@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("search")
-    suspend fun getItunesData(@Query("term") artist: String): Response
+    suspend fun getArtists(@Query("term") query: String): Response
 }

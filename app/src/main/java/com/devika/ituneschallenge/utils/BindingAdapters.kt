@@ -12,10 +12,7 @@ fun setProgressState(
     progressBar: ProgressBar,
     uiState: UiState?
 ) {
-    when (uiState) {
-        is UiState.Progress -> progressBar.visibility = View.VISIBLE
-        else -> progressBar.visibility = View.GONE
-    }
+    setVisibility(uiState, progressBar)
 }
 
 @BindingAdapter(value = ["setVisibility"])
@@ -23,10 +20,18 @@ fun setVisibilityState(
     view: View,
     uiState: UiState?
 ) {
-    when (uiState) {
-        is UiState.Success -> view.visibility = View.VISIBLE
-        else -> view.visibility = View.GONE
+    setVisibility(uiState, view)
+}
+
+@BindingAdapter(value = ["setEmptyState"])
+fun setEmptyState(
+    textView: TextView,
+    uiState: UiState?
+) {
+    uiState.let {
+        setVisibility(uiState, textView)
     }
+
 }
 
 @BindingAdapter(value = ["setErrorState"])
@@ -45,21 +50,12 @@ fun setErrorState(
     }
 }
 
-@BindingAdapter(value = ["setEmptyState"])
-fun setEmptyState(
-    textView: TextView,
-    uiState: UiState?
+private fun setVisibility(
+    uiState: UiState?,
+    view: View
 ) {
-    uiState.let {
-        when (uiState) {
-            is UiState.Empty -> {
-                textView.text = " No Artist Found! Please Search"
-                textView.visibility = View.VISIBLE
-            }
-            else -> {
-                textView.visibility = View.GONE
-            }
-        }
+    when (uiState) {
+        is UiState.Progress -> view.visibility = View.VISIBLE
+        else -> view.visibility = View.GONE
     }
-
 }

@@ -6,7 +6,7 @@
 
         <variable
             name="artistData"
-            type="com.devika.ituneschallenge.data.model.ItunesData" />
+            type="com.devika.ituneschallenge.data.model.ArtistData" />
     </data>
 
     <androidx.cardview.widget.CardView

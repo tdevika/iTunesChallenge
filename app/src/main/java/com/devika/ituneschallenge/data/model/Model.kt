@@ -6,11 +6,11 @@ import androidx.room.PrimaryKey
 
 data class Response(
     val resultCount: Int,
-    val results: List<ItunesData>
+    val results: List<ArtistData>
 )
 
-@Entity(tableName = "itunes_data")
-data class ItunesData(
+@Entity(tableName = "artists_data")
+data class ArtistData(
     val artworkUrl100: String,
     @PrimaryKey val collectionId: Int,
     val artistName: String?,

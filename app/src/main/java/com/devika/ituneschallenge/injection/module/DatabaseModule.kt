@@ -11,9 +11,9 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun ProvideDatabase(context: Context) = ItunesDatabase.buildDatabase(context)
+    fun provideDatabase(context: Context) = ItunesDatabase.buildDatabase(context)
 
     @Provides
     @Singleton
-    fun ProvideDao(itunesDatabase: ItunesDatabase)= itunesDatabase.ItunesDao()
+    fun provideDao(itunesDatabase: ItunesDatabase)= itunesDatabase.itunesDao()
 }

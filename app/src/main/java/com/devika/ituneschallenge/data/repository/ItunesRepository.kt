@@ -1,7 +1,7 @@
 package com.devika.ituneschallenge.data.repository
 
 import com.devika.ituneschallenge.data.database.ItunesDao
-import com.devika.ituneschallenge.data.model.ItunesData
+import com.devika.ituneschallenge.data.model.ArtistData
 import com.devika.ituneschallenge.data.services.ApiService
 import com.devika.ituneschallenge.utils.NetworkManager
 import kotlinx.coroutines.flow.Flow
@@ -13,12 +13,12 @@ class ItunesRepository @Inject constructor(
     private val networkManager: NetworkManager
 ) {
 
-    suspend fun getItems(query: String): Flow<List<ItunesData>> {
+    suspend fun getArtists(query: String): Flow<List<ArtistData>> {
         if (networkManager.isNetworkConnected()) {
-            val itunesData = apiService.getItunesData(query)
-            itunesData.results.map { it.searchTerm = query }
-            iTunesDao.addItunesDataToDB(itunesData.results)
+            val response = apiService.getArtists(query)
+            response.results.map { it.searchTerm = query }
+            iTunesDao.addArtistsToDB(response.results)
         }
-        return iTunesDao.getItunesData(query)
+        return iTunesDao.getArtists(query)
     }
 }

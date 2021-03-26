@@ -4,6 +4,8 @@ import com.devika.ituneschallenge.data.services.ApiService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class NetworkModule {
     @Provides
-    fun ProvideRetrofit(): Retrofit {
+    fun provideRetrofit(): Retrofit {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client =
@@ -29,5 +31,8 @@ class NetworkModule {
     }
 
     @Provides
-    fun ProvideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
+    @Provides
+    fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 }

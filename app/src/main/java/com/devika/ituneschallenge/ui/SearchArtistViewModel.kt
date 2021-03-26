@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SerachArtistViewModel @Inject constructor(private val searchArtistUseCase: SearchArtistUseCase) :
+class SearchArtistViewModel @Inject constructor(private val searchArtistUseCase: SearchArtistUseCase) :
     ViewModel() {
     val uiState = MutableLiveData<UiState>()
 

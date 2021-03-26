@@ -1,22 +1,19 @@
 package com.devika.ituneschallenge.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.devika.ituneschallenge.ItuneApplication
+import com.devika.ituneschallenge.ItunesApplication
 import com.devika.ituneschallenge.R
 import com.devika.ituneschallenge.data.domain.UiState
 import com.devika.ituneschallenge.data.domain.getList
@@ -34,11 +31,11 @@ class SearchArtistFragment : Fragment() {
     @Inject
     lateinit var searchArtistAdapter: SearchArtistAdapter
 
-    lateinit var viewModel: SerachArtistViewModel
+    lateinit var viewModel: SearchArtistViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (requireActivity().applicationContext as ItuneApplication).appComponent.inject(this)
+        (requireActivity().applicationContext as ItunesApplication).appComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -70,7 +67,7 @@ class SearchArtistFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        viewModel = ViewModelProvider(this, viewModelFactory).get(SerachArtistViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SearchArtistViewModel::class.java)
         binding.viewModel = viewModel
     }
 

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.devika.ituneschallenge.ui.SerachArtistViewModel" />
+            type="com.devika.ituneschallenge.ui.SearchArtistViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

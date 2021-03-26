@@ -3,7 +3,7 @@ package com.devika.ituneschallenge.injection.module
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.devika.ituneschallenge.injection.scope.ViewModelScope
-import com.devika.ituneschallenge.ui.SerachArtistViewModel
+import com.devika.ituneschallenge.ui.SearchArtistViewModel
 import com.devika.ituneschallenge.utils.ItunesViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -17,6 +17,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelScope(SerachArtistViewModel::class)
-    abstract fun addSearchArtistViewModel(searchArtistViewModel: SerachArtistViewModel):ViewModel
+    @ViewModelScope(SearchArtistViewModel::class)
+    abstract fun addSearchArtistViewModel(searchArtistViewModel: SearchArtistViewModel):ViewModel
 }

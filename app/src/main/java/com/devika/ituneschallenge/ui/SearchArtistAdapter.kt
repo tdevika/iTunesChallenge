@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.devika.ituneschallenge.data.model.ItunesData
+import com.devika.ituneschallenge.data.model.ArtistData
 import com.devika.ituneschallenge.databinding.ItemArtistsBinding
 import javax.inject.Inject
 
 class SearchArtistAdapter @Inject constructor() :
-    ListAdapter<ItunesData, SearchArtistAdapter.SearchArtistViewModel>(
-        ITUNES_DIFF_UTIL
+
+    ListAdapter<ArtistData, SearchArtistAdapter.SearchArtistViewModel>(
+        ARTIST_DIFF_UTIL
     ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchArtistViewModel {
@@ -24,9 +25,9 @@ class SearchArtistAdapter @Inject constructor() :
         holder.setData(getItem(position))
     }
 
-    inner class SearchArtistViewModel(val binding: ItemArtistsBinding) :
+    inner class SearchArtistViewModel(private val binding: ItemArtistsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun setData(item: ItunesData?) {
+        fun setData(item: ArtistData?) {
             binding.artistData = item
             Glide.with(binding.root.context)
                 .load(item?.artworkUrl100)
@@ -37,12 +38,12 @@ class SearchArtistAdapter @Inject constructor() :
 
 }
 
-private val ITUNES_DIFF_UTIL: DiffUtil.ItemCallback<ItunesData> =
-    object : DiffUtil.ItemCallback<ItunesData>() {
+private val ARTIST_DIFF_UTIL: DiffUtil.ItemCallback<ArtistData> =
+    object : DiffUtil.ItemCallback<ArtistData>() {
 
-        override fun areItemsTheSame(oldItem: ItunesData, newItem: ItunesData): Boolean =
+        override fun areItemsTheSame(oldItem: ArtistData, newItem: ArtistData): Boolean =
             oldItem.collectionId == newItem.collectionId
 
-        override fun areContentsTheSame(oldItem: ItunesData, newItem: ItunesData): Boolean =
+        override fun areContentsTheSame(oldItem: ArtistData, newItem: ArtistData): Boolean =
             oldItem == newItem
     }
