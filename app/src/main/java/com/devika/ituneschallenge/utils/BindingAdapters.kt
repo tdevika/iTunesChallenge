@@ -12,7 +12,10 @@ fun setProgressState(
     progressBar: ProgressBar,
     uiState: UiState?
 ) {
-    setVisibility(uiState, progressBar)
+    when (uiState) {
+        is UiState.Progress -> progressBar.visibility = View.VISIBLE
+        else -> progressBar.visibility = View.GONE
+    }
 }
 
 @BindingAdapter(value = ["setVisibility"])
@@ -20,18 +23,10 @@ fun setVisibilityState(
     view: View,
     uiState: UiState?
 ) {
-    setVisibility(uiState, view)
-}
-
-@BindingAdapter(value = ["setEmptyState"])
-fun setEmptyState(
-    textView: TextView,
-    uiState: UiState?
-) {
-    uiState.let {
-        setVisibility(uiState, textView)
+    when (uiState) {
+        is UiState.Success -> view.visibility = View.VISIBLE
+        else -> view.visibility = View.GONE
     }
-
 }
 
 @BindingAdapter(value = ["setErrorState"])
@@ -50,12 +45,20 @@ fun setErrorState(
     }
 }
 
-private fun setVisibility(
-    uiState: UiState?,
-    view: View
+@BindingAdapter(value = ["setEmptyState"])
+fun setEmptyState(
+    textView: TextView,
+    uiState: UiState?
 ) {
-    when (uiState) {
-        is UiState.Progress -> view.visibility = View.VISIBLE
-        else -> view.visibility = View.GONE
+    uiState.let {
+        when (uiState) {
+            is UiState.Empty -> {
+                textView.visibility = View.VISIBLE
+            }
+            else -> {
+                textView.visibility = View.GONE
+            }
+        }
     }
+
 }
